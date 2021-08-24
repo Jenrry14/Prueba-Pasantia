@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PruebaTrabajoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="IdCliente" />
+    </Key>
+    <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Apellido" Type="varchar" MaxLength="50" />
+    <Property Name="IdDireccion" Type="int" />
+  </EntityType>
+  <EntityType Name="Direcciones">
+    <Key>
+      <PropertyRef Name="IdDireccion" />
+    </Key>
+    <Property Name="IdDireccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Direccion" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Relacion">
+    <Key>
+      <PropertyRef Name="IdRelacion" />
+    </Key>
+    <Property Name="IdRelacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCliente" Type="int" />
+    <Property Name="IdDireccion" Type="int" />
+  </EntityType>
+  <Association Name="FK__Cliente__IdDirec__4E88ABD4">
+    <End Role="Direcciones" Type="Self.Direcciones" Multiplicity="0..1" />
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Direcciones">
+        <PropertyRef Name="IdDireccion" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="IdDireccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Relacion__IdClie__52593CB8">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+    <End Role="Relacion" Type="Self.Relacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="Relacion">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Relacion__IdDire__5165187F">
+    <End Role="Direcciones" Type="Self.Direcciones" Multiplicity="0..1" />
+    <End Role="Relacion" Type="Self.Relacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Direcciones">
+        <PropertyRef Name="IdDireccion" />
+      </Principal>
+      <Dependent Role="Relacion">
+        <PropertyRef Name="IdDireccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PruebaTrabajoModelStoreContainer">
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Direcciones" EntityType="Self.Direcciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Relacion" EntityType="Self.Relacion" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Cliente__IdDirec__4E88ABD4" Association="Self.FK__Cliente__IdDirec__4E88ABD4">
+      <End Role="Direcciones" EntitySet="Direcciones" />
+      <End Role="Cliente" EntitySet="Cliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Relacion__IdClie__52593CB8" Association="Self.FK__Relacion__IdClie__52593CB8">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Relacion" EntitySet="Relacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Relacion__IdDire__5165187F" Association="Self.FK__Relacion__IdDire__5165187F">
+      <End Role="Direcciones" EntitySet="Direcciones" />
+      <End Role="Relacion" EntitySet="Relacion" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<PruebaPasantia.Relacion>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="Filtrando" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente.Nombre_Completo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Direccione.Direccion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.Nombre_Completo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Direccione.Direccion)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IdRelacion }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IdRelacion }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdRelacion })
+            </td>
+        </tr>
+    }
+
+</table>
+@section scripts{
+    <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script>
+            $('#Filtrando').DataTable();
+    </script>
+}

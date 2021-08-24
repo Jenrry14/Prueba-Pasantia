@@ -1,0 +1,43 @@
+﻿@model IEnumerable<PruebaPasantia.Direccione>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="Filtrando" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Direccion)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IdDireccion }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IdDireccion }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdDireccion })
+            </td>
+        </tr>
+    }
+
+</table>
+@section scripts{
+    <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script>
+            $('#Filtrando').DataTable();
+    </script>
+}
